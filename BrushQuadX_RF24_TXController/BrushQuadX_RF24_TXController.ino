@@ -15,7 +15,11 @@
 
 const uint64_t pipeOut = 0xE8E8F0F0E1LL; //IMPORTANT: The same as in the receiver!!!
 
+// V2
 RF24 radio(9, 10); // select  CE and CSN  pins
+
+// V1
+// RF24 radio(10, 9); // select  CE and CSN  pins
 
 // The sizeof this struct should not exceed 32 bytes
 // This gives us up to 32 8 bits channels
@@ -54,8 +58,13 @@ void setup()
   resetData();
   Serial.begin(9600);               // starting the Serial Monitor
 
+  // V2
   pinMode(2, INPUT_PULLUP);
   pinMode(3, INPUT_PULLUP);
+
+  // V1
+  // pinMode(5, INPUT_PULLUP);
+  // pinMode(3, INPUT_PULLUP);
 }
 
 /**************************************************/
@@ -73,14 +82,22 @@ int mapJoystickValues(int val, int lower, int middle, int upper, bool reverse)
 }
 
 void loop()
-{
+{ 
   // The calibration numbers used here should be measured
   // for your joysticks till they send the correct values.
+  // V2
   data.throttle = mapJoystickValues( analogRead(A1), 0, 516, 1023, true );
   data.yaw      = mapJoystickValues( analogRead(A0), 0, 523, 1023, true );
   data.pitch    = mapJoystickValues( analogRead(A3), 0, 527, 1023, true );
   data.roll     = mapJoystickValues( analogRead(A2), 0, 490, 1023, true );
 
+  // V1
+  // data.throttle = mapJoystickValues( analogRead(A3), 0, 510, 1023, true );
+  // data.yaw      = mapJoystickValues( analogRead(A1), 0, 531, 1023, true );
+  // data.pitch    = mapJoystickValues( analogRead(A2), 0, 503, 1023, true );
+  // data.roll     = mapJoystickValues( analogRead(A6), 0, 512, 1023, true );
+
+  // Debug
   // Serial.print(" Yaw (A0):");
   // Serial.print(analogRead(A0));
 
