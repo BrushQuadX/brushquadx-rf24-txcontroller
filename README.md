@@ -56,6 +56,14 @@ At startup, the payload is initialized to throttle `0`, AUX channels `0`, and jo
 
 The sketch contains commented V1 pin mappings for reference, but those mappings are not active.
 
+## Test NRF24L01
+
+This is a simple and quick test to ensure NRF24L01 radio modules can communicate and transmit signals with one another.
+
+Test the functionality of two NRF24L01 modules by forming a transmitter-receiver pair using the following sample programs under `test/`.
+
+You should find that the transmitter transmits a message "nrftest" and the receiver receives the message every 200ms.
+
 ## Credits and sources
 
 - **Original implementation and release:** Electronoobs — [YouTube channel](https://www.youtube.com/channel/UCjiVhIvGmRZixSzupD0sS9Q)
